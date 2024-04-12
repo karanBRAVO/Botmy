@@ -4,6 +4,7 @@ import sys
 from Game.Colors import Colors
 from Game.Floor import Floor
 from Game.Player import Player
+from Game.Particles import Particles
 
 
 class Game():
@@ -32,6 +33,9 @@ class Game():
         # player
         self.player = Player(self.window,
                              self.windowWidth, self.windowHeight)
+        # particles
+        self.particles = Particles(self.window,
+                                   self.windowWidth, self.windowHeight)
 
     def start(self):
         while self.run:
@@ -48,6 +52,7 @@ class Game():
     def __draw(self):
         self.window.fill(self.colors.white)
         self.floor.draw()
+        self.particles.draw()
         self.player.draw()
 
     def __update(self):

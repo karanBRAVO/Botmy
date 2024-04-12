@@ -18,7 +18,7 @@ class Player():
         # keys
         self.keys = None
         # speed
-        self.speed = 2
+        self.speed = 1
 
     def draw(self):
         # check which key(s) is pressed
