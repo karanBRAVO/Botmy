@@ -32,6 +32,8 @@ class Floor():
         self.__getKeys()
         # update the position
         self.__updatePoss()
+        # correct the position
+        self.__correctPosition()
         # draw at the updated position
         for _img, _pos in zip(self.floorImgs, self.imgPoss):
             _img.show(_pos)
@@ -39,18 +41,33 @@ class Floor():
             #                 _pos.width, _pos.height,
             #                 self.colors.red, 10)
 
+    def __correctPosition(self):
+        for _pos in self.imgPoss:
+            if _pos.x <= -2 * self.windowWidth:
+                _pos.x = self.windowWidth
+            if _pos.x >= 2 * self.windowWidth:
+                _pos.x = -self.windowWidth
+            if _pos.y >= 2 * self.windowHeight:
+                _pos.y = -self.windowHeight
+            if _pos.y <= -2 * self.windowHeight:
+                _pos.y = self.windowHeight
+
     def __updatePoss(self):
         if self.keys:
-            if self.keys[pygame.K_RIGHT]:  # right arrow key
+            # right arrow key
+            if self.keys[pygame.K_RIGHT]:
                 for _pos in self.imgPoss:
                     _pos.x -= self.speed
-            elif self.keys[pygame.K_LEFT]:  # left arrow key
+            # left arrow key
+            elif self.keys[pygame.K_LEFT]:
                 for _pos in self.imgPoss:
                     _pos.x += self.speed
-            elif self.keys[pygame.K_UP]:  # up arrow key
+            # up arrow key
+            if self.keys[pygame.K_UP]:
                 for _pos in self.imgPoss:
                     _pos.y += self.speed
-            elif self.keys[pygame.K_DOWN]:  # down arrow key
+            # down arrow key
+            elif self.keys[pygame.K_DOWN]:
                 for _pos in self.imgPoss:
                     _pos.y -= self.speed
 

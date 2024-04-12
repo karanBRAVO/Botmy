@@ -18,7 +18,7 @@ class Player():
         # keys
         self.keys = None
         # speed
-        self.speed = 1
+        self.speed = 2
 
     def draw(self):
         # check which key(s) is pressed
@@ -32,13 +32,17 @@ class Player():
 
     def __updatePos(self):
         if self.keys:
-            if self.keys[pygame.K_RIGHT]:  # right arrow key
+            # right arrow key
+            if self.keys[pygame.K_RIGHT] and self.pos.x < self.windowWidth - (2 * self.pos.width):
                 self.pos.x += self.speed
-            elif self.keys[pygame.K_LEFT]:  # left arrow key
+            # left arrow key
+            elif self.keys[pygame.K_LEFT] and self.pos.x > self.pos.width:
                 self.pos.x -= self.speed
-            elif self.keys[pygame.K_UP]:  # up arrow key
+            # up arrow key
+            if self.keys[pygame.K_UP] and self.pos.y > self.pos.height:
                 self.pos.y -= self.speed
-            elif self.keys[pygame.K_DOWN]:  # down arrow key
+            # down arrow key
+            elif self.keys[pygame.K_DOWN] and self.pos.y < self.windowHeight - (2 * self.pos.height):
                 self.pos.y += self.speed
 
     def __getKeys(self):
