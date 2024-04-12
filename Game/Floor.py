@@ -1,56 +1,59 @@
 import pygame
 from Game.Colors import Colors
+from Game.Image import Image
 
 
 class Floor():
-    def __init__(self, window: pygame.Surface, width: int, height: int, path: str):
+    def __init__(self, window: pygame.Surface, window_width: int, window_height: int, img_width: int, img_height: int, img_path: str):
         # window
         self.window = window
-        # assets path
-        self.path = path
+        # window dimensions
+        self.windowWidth = window_width
+        self.windowHeight = window_height
         # colors
         self.colors = Colors()
+        # IMAGE
+        # path
+        self.imgPath = img_path
         # dimensions
-        self.width = width
-        self.height = height
-        # image
-        self.image = None
+        self.imgWidth = img_width
+        self.imgHeight = img_height
+        # images
+        self.floorImgs = self.__getImages()
         # positions
-        self.pos = [self.__getBB(-self.width, -self.height,
-                                 self.width, self.height),
-                    self.__getBB(0, -self.height,
-                                 self.width, self.height),
-                    self.__getBB(self.width, -self.height,
-                                 self.width, self.height),
-                    self.__getBB(-self.width, 0,
-                                 self.width, self.height),
-                    self.__getBB(0, 0,
-                                 self.width, self.height),
-                    self.__getBB(self.width, 0,
-                                 self.width, self.height),
-                    self.__getBB(-self.width, self.height,
-                                 self.width, self.height),
-                    self.__getBB(0, self.height,
-                                 self.width, self.height),
-                    self.__getBB(self.width, self.height,
-                                 self.width, self.height)]
-        # load the image
-        self.__loadImage()
+        self.imgPoss = self.__getPositions()
 
     def draw(self):
-        for _p in self.pos:
-            self.__showImage(_p)
+        for _img, _pos in zip(self.floorImgs, self.imgPoss):
+            _img.show(_pos)
 
-    def __showImage(self, pos: pygame.Rect):
-        if self.image:
-            self.window.blit(self.image, pos)
+    def __getImages(self) -> list[Image]:
+        imgs = []
+        for i in range(8):
+            img = Image(self.window, self.imgPath,
+                        self.imgWidth, self.imgHeight)
+            imgs.append(img)
+        return imgs
 
-    def __loadImage(self):
-        try:
-            self.image = pygame.transform.scale(pygame.image.load(self.path),
-                                                (self.width, self.height))
-        except Exception as e:
-            print(e)
+    def __getPositions(self):
+        return [self.__getBB(-self.windowWidth, -self.windowHeight,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(0, -self.windowHeight,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(self.windowWidth, -self.windowHeight,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(-self.windowWidth, 0,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(0, 0,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(self.windowWidth, 0,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(-self.windowWidth, self.windowHeight,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(0, self.windowHeight,
+                             self.windowWidth, self.windowHeight),
+                self.__getBB(self.windowWidth, self.windowHeight,
+                             self.windowWidth, self.windowHeight)]
 
     def __drawRect(self, x: int, y: int, width: int, height: int, color: tuple, _w: int):
         pygame.draw.rect(self.window,

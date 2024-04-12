@@ -3,6 +3,7 @@ from pygame.locals import *
 import sys
 from Game.Colors import Colors
 from Game.Floor import Floor
+from Game.Player import Player
 
 
 class Game():
@@ -26,7 +27,10 @@ class Game():
         # Floor
         self.floor = Floor(self.window,
                            self.windowWidth, self.windowHeight,
+                           self.windowWidth, self.windowHeight,
                            "assets/floor.jpg")
+        # player
+        self.player = Player(self.window, 30, 60)
 
     def start(self):
         while self.run:
@@ -43,6 +47,7 @@ class Game():
     def __draw(self):
         self.window.fill(self.colors.white)
         self.floor.draw()
+        self.player.draw()
 
     def __update(self):
         pygame.display.update()
