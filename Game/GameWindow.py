@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import sys
 from Game.Colors import Colors
+from Game.Floor import Floor
 
 
 class Game():
@@ -22,6 +23,10 @@ class Game():
         self.fps = 60
         # states
         self.run = True
+        # Floor
+        self.floor = Floor(self.window,
+                           self.windowWidth, self.windowHeight,
+                           "assets/floor.jpg")
 
     def start(self):
         while self.run:
@@ -37,6 +42,7 @@ class Game():
 
     def __draw(self):
         self.window.fill(self.colors.white)
+        self.floor.draw()
 
     def __update(self):
         pygame.display.update()
