@@ -22,14 +22,44 @@ class Floor():
         self.floorImgs = self.__getImages()
         # positions
         self.imgPoss = self.__getPositions()
+        # keys
+        self.keys = None
+        # speed
+        self.speed = 1
 
     def draw(self):
+        # check which key(s) is pressed
+        self.__getKeys()
+        # update the position
+        self.__updatePoss()
+        # draw at the updated position
         for _img, _pos in zip(self.floorImgs, self.imgPoss):
             _img.show(_pos)
+            # self.__drawRect(_pos.x, _pos.y,
+            #                 _pos.width, _pos.height,
+            #                 self.colors.red, 10)
+
+    def __updatePoss(self):
+        if self.keys:
+            if self.keys[pygame.K_RIGHT]:  # right arrow key
+                for _pos in self.imgPoss:
+                    _pos.x -= self.speed
+            elif self.keys[pygame.K_LEFT]:  # left arrow key
+                for _pos in self.imgPoss:
+                    _pos.x += self.speed
+            elif self.keys[pygame.K_UP]:  # up arrow key
+                for _pos in self.imgPoss:
+                    _pos.y += self.speed
+            elif self.keys[pygame.K_DOWN]:  # down arrow key
+                for _pos in self.imgPoss:
+                    _pos.y -= self.speed
+
+    def __getKeys(self):
+        self.keys = pygame.key.get_pressed()
 
     def __getImages(self) -> list[Image]:
         imgs = []
-        for i in range(8):
+        for i in range(9):
             img = Image(self.window, self.imgPath,
                         self.imgWidth, self.imgHeight)
             imgs.append(img)

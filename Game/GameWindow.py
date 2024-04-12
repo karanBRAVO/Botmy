@@ -30,7 +30,8 @@ class Game():
                            self.windowWidth, self.windowHeight,
                            "assets/floor.jpg")
         # player
-        self.player = Player(self.window, 30, 60)
+        self.player = Player(self.window,
+                             self.windowWidth, self.windowHeight)
 
     def start(self):
         while self.run:
