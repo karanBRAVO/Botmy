@@ -30,13 +30,15 @@ class Game():
         self.floor = Floor(self.window,
                            self.windowWidth, self.windowHeight,
                            self.windowWidth, self.windowHeight,
-                           "assets/floor.jpg")
+                           "assets/floor.png")
         # player
         self.player = Player(self.window,
-                             self.windowWidth, self.windowHeight)
+                             self.windowWidth, self.windowHeight,
+                             "assets/player.png")
         # particles
         self.particles = Particles(self.window,
-                                   self.windowWidth, self.windowHeight)
+                                   self.windowWidth, self.windowHeight,
+                                   "assets/particle.png")
         # score
         self.score = Score(self.window,
                            self.windowWidth, self.windowHeight)

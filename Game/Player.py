@@ -1,9 +1,10 @@
 import pygame
 from Game.Colors import Colors
+from Game.Image import Image
 
 
 class Player():
-    def __init__(self, window: pygame.Surface, window_width: int, window_height: int):
+    def __init__(self, window: pygame.Surface, window_width: int, window_height: int, img_path: str):
         # window
         self.window = window
         # window dimensions
@@ -12,9 +13,13 @@ class Player():
         # position and dimensions
         self.pos = self.__getBB(self.windowWidth // 2,
                                 self.windowHeight // 2,
-                                15, 15)
+                                35, 50)
         # colors
         self.colors = Colors()
+        # image
+        self.imgPath = img_path
+        self.image = Image(self.window, self.imgPath,
+                           self.pos.width, self.pos.height)
         # keys
         self.keys = None
         # speed
@@ -26,9 +31,13 @@ class Player():
         # update the position of the player
         self.__updatePos()
         # (re)draw at the updated position
-        self.__drawRect(self.pos.x, self.pos.y,
-                        self.pos.width, self.pos.height,
-                        self.colors.blue, 0)
+        self.__show()
+
+    def __show(self):
+        self.image.show(self.pos)
+        # self.__drawRect(self.pos.x, self.pos.y,
+        #                 self.pos.width, self.pos.height,
+        #                 self.colors.blue, 2)
 
     def __updatePos(self):
         if self.keys:

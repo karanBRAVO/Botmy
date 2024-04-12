@@ -1,10 +1,11 @@
 import pygame
 from Game.Colors import Colors
+from Game.Image import Image
 import random
 
 
 class Particles():
-    def __init__(self, window: pygame.Surface, window_width: int, window_height: int):
+    def __init__(self, window: pygame.Surface, window_width: int, window_height: int, img_path: str):
         # window
         self.window = window
         # window dimensions
@@ -12,9 +13,12 @@ class Particles():
         self.windowHeight = window_height
         # colors
         self.colors = Colors()
+        # image
+        self.imgPath = img_path
+        self.images: list[Image] = []
         # particles
-        self.width = 5
-        self.height = 5
+        self.width = 20
+        self.height = 20
         self.particles: list[pygame.Rect] = []
         # minimum particles on the floor at given time
         self.minParticles = 10
@@ -71,10 +75,11 @@ class Particles():
         self.keys = pygame.key.get_pressed()
 
     def __showParticles(self):
-        for particle in self.particles:
-            self.__drawRect(particle.x, particle.y,
-                            particle.width, particle.height,
-                            self.colors.pink, 0)
+        for _img, particle in zip(self.images, self.particles):
+            _img.show(particle)
+            # self.__drawRect(particle.x, particle.y,
+            #                 particle.width, particle.height,
+            #                 self.colors.pink, 0)
 
     def __generateRandomParticles(self):
         if len(self.particles) <= self.minParticles:
@@ -84,6 +89,9 @@ class Particles():
                 particle = self.__getBB(x, y,
                                         self.width, self.height)
                 self.particles.append(particle)
+                img = Image(self.window, self.imgPath,
+                            self.width, self.height)
+                self.images.append(img)
 
     def __drawRect(self, x: int, y: int, width: int, height: int, color: int, _w: int):
         pygame.draw.rect(self.window,
