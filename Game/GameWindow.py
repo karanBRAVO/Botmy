@@ -5,6 +5,7 @@ from Game.Colors import Colors
 from Game.Floor import Floor
 from Game.Player import Player
 from Game.Particles import Particles
+from Game.Score import Score
 
 
 class Game():
@@ -36,6 +37,9 @@ class Game():
         # particles
         self.particles = Particles(self.window,
                                    self.windowWidth, self.windowHeight)
+        # score
+        self.score = Score(self.window,
+                           self.windowWidth, self.windowHeight)
 
     def start(self):
         while self.run:
@@ -53,6 +57,7 @@ class Game():
         self.window.fill(self.colors.white)
         self.floor.draw()
         self.particles.draw()
+        self.score.draw(self.player.pos, self.particles.particles)
         self.player.draw()
 
     def __update(self):
