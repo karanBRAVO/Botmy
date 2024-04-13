@@ -7,6 +7,7 @@ from Game.Player import Player
 from Game.Particles import Particles
 from Game.Score import Score
 from Game.Bullet import Bullet
+from Game.Enemy import Enemy
 
 
 class Game():
@@ -21,7 +22,7 @@ class Game():
         # window
         self.window = pygame.display.set_mode((self.windowWidth,
                                               self.windowHeight))
-        pygame.display.set_caption("Game Development")
+        pygame.display.set_caption("Botmy")
         # clock
         self.clock = pygame.time.Clock()
         self.fps = 60
@@ -31,7 +32,7 @@ class Game():
         self.floor = Floor(self.window,
                            self.windowWidth, self.windowHeight,
                            self.windowWidth, self.windowHeight,
-                           "assets/floor.png")
+                           "assets/floor.jpg")
         # player
         self.player = Player(self.window,
                              self.windowWidth, self.windowHeight,
@@ -47,6 +48,10 @@ class Game():
         self.bullet = Bullet(self.window,
                              self.windowWidth, self.windowHeight,
                              "assets/bullet.png")
+        # enemy
+        self.enemy = Enemy(self.window,
+                           self.windowWidth, self.windowHeight,
+                           "assets/enemy.png")
 
     def start(self):
         while self.run:
@@ -65,8 +70,9 @@ class Game():
         self.floor.draw()
         self.particles.draw()
         self.score.draw(self.player.pos, self.particles.particles)
+        self.bullet.draw(self.player, self.enemy)
         self.player.draw()
-        self.bullet.draw(self.player)
+        self.enemy.draw(self.player)
 
     def __update(self):
         pygame.display.update()

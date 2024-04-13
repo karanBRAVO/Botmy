@@ -13,7 +13,7 @@ class Player():
         # position and dimensions
         self.pos = self.__getBB(self.windowWidth // 2,
                                 self.windowHeight // 2,
-                                35, 50)
+                                35, 41)
         # colors
         self.colors = Colors()
         # image

@@ -3,6 +3,7 @@ import math
 from Game.Colors import Colors
 from Game.Image import Image
 from Game.Player import Player
+from Game.Enemy import Enemy
 
 
 class Bullet():
@@ -20,13 +21,13 @@ class Bullet():
         self.minBulletCount = 10
         self.bullets: list[dict] = []
 
-    def draw(self, player: Player):
+    def draw(self, player: Player, enemy: Enemy):
         # calculate bullet metrics [direction, angle, startPoint]
         self.__checkFire(player)
         # fire the bullet
-        self.__fire()
+        self.__fire(enemy)
 
-    def __fire(self):
+    def __fire(self, enemy: Enemy):
         for i in range(len(self.bullets)):
             bullet = self.bullets[i]
             # update the bullet position
@@ -41,6 +42,17 @@ class Bullet():
             #                 self.colors.red, 0)
             # remove the bullet outside window
             if bullet['bb'].x < 0 or bullet['bb'].y < 0 or bullet['bb'].x > self.windowWidth or bullet['bb'].y > self.windowHeight:
+                self.bullets.pop(i)
+                break
+            # check collision of bullet and enemy
+            isShot = False
+            for j in range(len(enemy.enemies)):
+                e = enemy.enemies[j]
+                if e['bb'].colliderect(bullet['bb']):
+                    enemy.enemies.pop(j)
+                    isShot = True
+                    break
+            if isShot:
                 self.bullets.pop(i)
                 break
 
