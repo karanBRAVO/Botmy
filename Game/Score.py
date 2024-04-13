@@ -12,7 +12,7 @@ class Score():
         # score
         self.score = 0
         # font
-        self.font = pygame.font.SysFont('monospace', 11, True, False)
+        self.font = pygame.font.SysFont('monospace', 15, True, False)
         # colors
         self.colors = Colors()
         # score position
@@ -25,11 +25,16 @@ class Score():
         self.__show()
 
     def __show(self):
-        score = self.font.render(f"score: {self.score}", True, self.colors.red)
+        score = self.font.render(f"score: {self.score}", True, self.colors.black)
         self.window.blit(score, self.scorePos)
 
     def __update(self):
         self.score += 1
+
+    def __drawRect(self, x: int, y: int, width: int, height: int, color: tuple):
+        pygame.draw.rect(self.window,
+                         color,
+                         (x, y, width, height))
 
     def __detectCollision(self, player: pygame.Rect, particles: list[pygame.Rect]):
         for i in range(len(particles)):
