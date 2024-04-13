@@ -42,16 +42,16 @@ class Player():
     def __updatePos(self):
         if self.keys:
             # right arrow key
-            if self.keys[pygame.K_RIGHT] and self.pos.x < self.windowWidth - (2 * self.pos.width):
+            if (self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]) and self.pos.x < self.windowWidth - (2 * self.pos.width):
                 self.pos.x += self.speed
             # left arrow key
-            elif self.keys[pygame.K_LEFT] and self.pos.x > self.pos.width:
+            elif (self.keys[pygame.K_LEFT] or self.keys[pygame.K_a]) and self.pos.x > self.pos.width:
                 self.pos.x -= self.speed
             # up arrow key
-            if self.keys[pygame.K_UP] and self.pos.y > self.pos.height:
+            if (self.keys[pygame.K_UP] or self.keys[pygame.K_w]) and self.pos.y > self.pos.height:
                 self.pos.y -= self.speed
             # down arrow key
-            elif self.keys[pygame.K_DOWN] and self.pos.y < self.windowHeight - (2 * self.pos.height):
+            elif (self.keys[pygame.K_DOWN] or self.keys[pygame.K_s]) and self.pos.y < self.windowHeight - (2 * self.pos.height):
                 self.pos.y += self.speed
 
     def __getKeys(self):

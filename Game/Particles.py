@@ -55,19 +55,19 @@ class Particles():
     def __updatePoss(self):
         if self.keys:
             # right arrow key
-            if self.keys[pygame.K_RIGHT]:
+            if self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]:
                 for _pos in self.particles:
                     _pos.x -= self.speed
             # left arrow key
-            elif self.keys[pygame.K_LEFT]:
+            elif self.keys[pygame.K_LEFT] or self.keys[pygame.K_a]:
                 for _pos in self.particles:
                     _pos.x += self.speed
             # up arrow key
-            if self.keys[pygame.K_UP]:
+            if self.keys[pygame.K_UP] or self.keys[pygame.K_w]:
                 for _pos in self.particles:
                     _pos.y += self.speed
             # down arrow key
-            elif self.keys[pygame.K_DOWN]:
+            elif self.keys[pygame.K_DOWN] or self.keys[pygame.K_s]:
                 for _pos in self.particles:
                     _pos.y -= self.speed
 
