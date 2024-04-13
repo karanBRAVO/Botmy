@@ -27,7 +27,7 @@ class Particles():
         # keys
         self.keys = None
         # speed
-        self.speed = 1
+        self.speed = 2
 
     def draw(self):
         # generate new particles

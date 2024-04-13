@@ -6,6 +6,7 @@ from Game.Floor import Floor
 from Game.Player import Player
 from Game.Particles import Particles
 from Game.Score import Score
+from Game.Bullet import Bullet
 
 
 class Game():
@@ -42,6 +43,10 @@ class Game():
         # score
         self.score = Score(self.window,
                            self.windowWidth, self.windowHeight)
+        # bullets
+        self.bullet = Bullet(self.window,
+                             self.windowWidth, self.windowHeight,
+                             "assets/bullet.png")
 
     def start(self):
         while self.run:
@@ -61,6 +66,7 @@ class Game():
         self.particles.draw()
         self.score.draw(self.player.pos, self.particles.particles)
         self.player.draw()
+        self.bullet.draw(self.player)
 
     def __update(self):
         pygame.display.update()

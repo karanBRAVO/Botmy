@@ -25,7 +25,7 @@ class Floor():
         # keys
         self.keys = None
         # speed
-        self.speed = 1
+        self.speed = 2
 
     def draw(self):
         # check which key(s) is pressed
